@@ -139,8 +139,8 @@
                             <a class="dropdown-item" href="{{ route('profile') }}"><i class="mdi mdi-account" aria-hidden="true"></i>  My Profile</a>
                             <a class="dropdown-item" href="{{ route('address') }}"><i class="mdi mdi-chevron-right" aria-hidden="true"></i>  My Address</a>
                             <a class="dropdown-item" href="wishlist.html"><i class="mdi mdi-chevron-right" aria-hidden="true"></i>  Wish List </a>
-                            <a class="dropdown-item" href="orderlist.html"><i class="mdi mdi-chevron-right" aria-hidden="true"></i>  Order List</a>
-                            <a class="dropdown-item" href="javascript:void(0)" id="log-out-button"><i class="mdi mdi-logout" aria-hidden="true"></i>  Logout</a>
+                            <a class="dropdown-item" href="{{ route('orders')}}"><i class="mdi mdi-truck" aria-hidden="true"></i>  Order List</a>
+                            <a class="dropdown-item log-out-button" href="javascript:void(0)" id="log-out-button"><i class="mdi mdi-logout" aria-hidden="true"></i>  Logout</a>
                         </div>
                     </li>
                     @endif

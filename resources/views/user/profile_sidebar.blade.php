@@ -9,8 +9,8 @@
             <a href="{{ route('profile') }}" class="list-group-item list-group-item-action @if(Request::url() == url('user/profile'))active @endif"><i aria-hidden="true" class="mdi mdi-account-outline"></i>  My Profile</a>
             <a href="{{ route('address') }}" class="list-group-item list-group-item-action @if(Request::url() == url('user/address') or Request::url() == url('user/address/add'))active @endif"><i aria-hidden="true" class="mdi mdi-map-marker-circle"></i>  My Address</a>
             <a href="wishlist.html" class="list-group-item list-group-item-action"><i aria-hidden="true" class="mdi mdi-heart-outline"></i>  Buy again </a>
-            <a href="orderlist.html" class="list-group-item list-group-item-action"><i aria-hidden="true" class="mdi mdi-format-list-bulleted"></i>  Order List</a>
-            <a href="#" class="list-group-item list-group-item-action"><i aria-hidden="true" class="mdi mdi-lock"></i>  Logout</a>
+            <a href="{{ route('orders') }}" class="list-group-item list-group-item-action @if(Request::url() == route('orders'))active @endif"><i aria-hidden="true" class="mdi mdi-format-list-bulleted"></i>  Order List</a>
+            <a href="javascript:void(0)" class="list-group-item list-group-item-action log-out-button"><i aria-hidden="true" class="mdi mdi-lock"></i>  Logout</a>
         </div>
     </div>
 </div>

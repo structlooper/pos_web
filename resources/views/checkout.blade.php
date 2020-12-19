@@ -111,7 +111,7 @@
                                                 <button type="button" style="width: 100%" class="form-check-label btn btn-lg btn-outline-danger border  text-left "  onclick="confirmation()">
                                                <i class="mdi mdi-truck-fast"></i> Cash on Delivery
 
-                                            </button>
+                                profile            </button>
                                             </div>
                                             </div>
                                             <hr>
@@ -133,12 +133,12 @@
                                             <div class="col-lg-10 col-md-10 mx-auto order-done">
                                                 <i class="mdi mdi-check-circle-outline text-secondary"></i>
                                                 <h4 class="text-success">Congrats! Your Order has been Placed..</h4>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lobortis tincidunt est, et euismod purus suscipit quis. Etiam euismod ornare elementum. Sed ex est, Sed ex est, consectetur eget consectetur, Lorem ipsum dolor sit amet...
-                                                </p>
+{{--                                                <p>--}}
+{{--                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lobortis tincidunt est, et euismod purus suscipit quis. Etiam euismod ornare elementum. Sed ex est, Sed ex est, consectetur eget consectetur, Lorem ipsum dolor sit amet...--}}
+{{--                                                </p>--}}
                                             </div>
                                             <div class="text-center">
-                                                <a href="{{ route('profile') }}"><button type="submit" class="btn btn-secondary mb-2 btn-lg">See Order Details</button></a>
+                                                <a href="{{ route('orders') }}"><button type="submit" class="btn btn-secondary mb-2 btn-lg">See Order Details</button></a>
                                             </div>
                                         </div>
                                     </div>
@@ -171,13 +171,13 @@
             $('.checkout-step-two').show()
         }
         function confirmation(){
-            let amount = $('#final_amount').html()
+            let amount = $('.grand_ttl').html()
             $('#final-cash-btn').html(`Proceed to place order <i class="mdi mdi-truck-fast"></i> ${amount}`)
             $('#comationOrderModal').modal('show')
         }
 
         function cashOndelivery(){
-            let amount = $('#final_amount').html()
+            let amount = $('.grand_ttl').html()
             $('#final-cash-btn').html('loading.....')
             let note = $('#note').val()
             let address_id = $('input[name="user_address"]:checked').val();
@@ -230,13 +230,13 @@
             @else
                 token = 'null';
             @endif
-            let amount = parseFloat($('#final_amount').html())
+            let amount = parseFloat($('.grand_ttl').html()) * 10
             $('.online-payment-btn').html('loading.....')
             let note = $('#note').val()
             let address_id = $('input[name="user_address"]:checked').val();
             var options = {
                 "key": "{{ $razorpay_credentials->razorpay_key_id }}",
-                "amount": amount *100, // Example: 2000 paise = INR 20
+                "amount": amount * 10, // Example: 2000 paise = INR 20
                 "name": "{{ $data['site_settings']->site_name }}",
                 "description": "description",
                 "image": "{{ $data['logo_url'] }}",// COMPANY LOGO

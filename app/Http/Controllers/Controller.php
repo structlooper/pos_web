@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     public function __construct()
     {
-        $data['image_url'] = 'http://tbosmartmart.com/pos/';
+        $data['image_url'] = 'https://tbosmartmart.com/pos/';
         $data['logo_url'] = 'https://tbosmartmart.com/pos/themes/default/shop/assets/images/thebestone_logo.png';
         $data['site_settings'] = DB::table('sma_settings')
             ->first();

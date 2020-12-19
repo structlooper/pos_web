@@ -52,4 +52,31 @@ class UserController extends Controller
             ->first();
         return view('user.edit_address')->with($dom);
     }
+    public function orders(){
+        $dom['user_orders'] = array_reverse(DB::table('sma_sales')
+            ->join('sma_user_address','sma_user_address.address_id','=','sma_sales.address_id')
+            ->where('sma_sales.customer_id',Session::get('user_data')['user_id'])
+            ->get()->toArray());
+        return view('user.orders')->with($dom);
+    }
+    public function order_details(Request $request){
+        $order_products = DB::table('sma_sale_items')
+
+            ->join('sma_products','sma_products.id','=','sma_sale_items.product_id')
+            ->join('sma_units','sma_products.unit','=','sma_units.id')
+            ->select(
+                'sma_products.id',
+                'sma_products.image',
+                'sma_products.name',
+                'sma_units.name as unit',
+                'sma_products.cost',
+                'sma_products.price',
+                'sma_sale_items.quantity as qty',
+                'sma_sale_items.tax'
+            )
+            ->where('sma_sale_items.sale_id',$request->order_id)
+
+            ->get()->toArray();
+        return ['status' => true,'msg' => 'ordered products','data' => $order_products];
+    }
 }

@@ -340,16 +340,22 @@
                     //     </a>
                     // </h5>`)
                     $('.cart-item-2').html(`(${result.data.items} item)`)
+
                     let subtotal = 0.00;
+                    let finalTotal = 0.00;
                     let main_price = 0.00;
+                    let tax_price = 0.00;
                     if (result.data.items == 0) {
                         $('.cart-sidebar-body').html(``)
                         $('.cart-sidebar-footer').hide()
                     } else {
                         $.each(result.data.products, function (key, val) {
+                            let p_tax = val.tax_rate ? parseFloat(val.tax_rate) : 0.00
                             $('.product-count' + val.product_id).html(val.qty)
-                            subtotal += parseFloat(val.price) * parseInt(val.qty)
-                            main_price += parseFloat(val.cost) * parseInt(val.qty)
+                            subtotal += (parseFloat(val.price) * parseInt(val.qty))
+                            finalTotal += (parseFloat(val.price) + p_tax) * parseInt(val.qty)
+                            main_price += (parseFloat(val.cost) + p_tax) * parseInt(val.qty)
+                            tax_price += p_tax * parseInt(val.qty)
                             if (key == 0) {
                                 $('.cart-sidebar-body').html(`
                       <div class="cart-list-product">
@@ -381,9 +387,13 @@
                      <div class="cart-store-details">
             <h6>Sub Total <strong class="float-right text-dark" id="final_amount">${subtotal} ₹</strong></h6>
             <h6>Delivery Charges <strong class="float-right text-success">FREE</strong></h6>
+            <h6>tax <strong class="float-right text-dark">${tax_price.toFixed(2)} ₹</strong></h6>
             <h6>Your total savings <strong class="float-right text-danger">${svaing.toFixed(2)} %</strong></h6>
+                    <h6>Total <strong class="float-right text-secondary grand_ttl">${finalTotal} ₹<strong></h6>
+
         </div>
-        <a href="{{ route('checkout') }}"><button class="btn btn-secondary btn-lg btn-block text-left" type="button" @if(Request::url() == url('user/checkout')) style="display:none;" @endif><span class="float-left" ><i class="mdi mdi-cart-outline"></i> Proceed to Checkout </span><span class="float-right"><strong>${subtotal} ₹</strong> <span class="mdi mdi-chevron-right"></span></span></button></a>
+
+        <a href="{{ route('checkout') }}"><button class="btn btn-secondary btn-lg btn-block text-left" type="button" @if(Request::url() == url('user/checkout')) style="display:none;" @endif><span class="float-left" ><i class="mdi mdi-cart-outline"></i> Proceed to Checkout </span><span class="float-right"><strong>${finalTotal} ₹</strong> <span class="mdi mdi-chevron-right"></span></span></button></a>
                     `)
 
 
@@ -605,7 +615,7 @@
             }
         });
 
-        $('#log-out-button').click(function (){
+        $('.log-out-button').click(function (){
             $('body').append(`
             <form action="{{ route('logout') }}" method="post" id="logoutForm" style="display:none;">
                 @csrf

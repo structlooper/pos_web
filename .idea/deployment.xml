@@ -5,7 +5,7 @@
       <paths name="pos_website">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/tbosmartmart.com/website/" />
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/tbosmartmart.com/" />
           </mappings>
         </serverdata>
       </paths>

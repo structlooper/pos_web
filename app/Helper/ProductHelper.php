@@ -34,7 +34,7 @@ class ProductHelper
                     'sma_products.second_name',
                     'sma_products.hide',
                     'sma_products.hide_pos',
-                    'sma_products.brand',
+                    'sma_products.brand'
                 )
                 ->join('sma_products','sma_products.id','=','sma_offer_products.product_id')
                 ->join('sma_units','sma_units.id','=','sma_products.unit')

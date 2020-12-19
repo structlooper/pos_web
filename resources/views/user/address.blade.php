@@ -156,4 +156,12 @@
             });
         })
     </script>
+    <!-- Data Tables -->
+    <link href="{{asset('website/vendor/datatables/datatables.min.css')}}" rel="stylesheet" />
+    <script src="{{asset('website/vendor/datatables/datatables.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.datatabel').DataTable();
+        } );
+    </script>
 @endsection
