@@ -57,15 +57,20 @@
     // This function runs when the 'sign-in-button' is clicked
     // Takes the value from the 'phoneNumber' input and sends SMS to that phone number
     function submitPhoneNumberAuth() {
-        var phoneNumber = document.getElementById("phoneNumber").value;
+        // e.preventDefault();
+        var phoneNumber = '+91' + document.getElementById("phoneNumber").value;
         var appVerifier = window.recaptchaVerifier;
         firebase
             .auth()
             .signInWithPhoneNumber(phoneNumber, appVerifier)
             .then(function(confirmationResult) {
+                alert('otp send')
                 window.confirmationResult = confirmationResult;
+
             })
             .catch(function(error) {
+
+
                 console.log(error);
             });
     }

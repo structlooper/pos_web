@@ -33,6 +33,17 @@
             text-overflow: ellipsis;
 
         }
+        #partitioned {
+            padding-left: 15px;
+            letter-spacing: 42px;
+            border: 0;
+            background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+            background-position: bottom;
+            background-size: 50px 1px;
+            background-repeat: repeat-x;
+            background-position-x: 35px;
+            width: 300px;
+        }
     </style>
 @yield('style')
 
@@ -54,31 +65,48 @@
                                 <span aria-hidden="true"><i class="mdi mdi-close"></i></span>
                                 <span class="sr-only">Close</span>
                             </button>
-                            <form>
+{{--                            <form>--}}
                                 <div class="login-modal-right">
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="login" role="tabpanel">
                                             <h5 class="heading-design-h5">Login to your account</h5>
-                                            <fieldset class="form-group">
-                                                <label>Enter Mobile number</label>
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text" id="basic-addon1">+91</span>
-                                                    </div>
-                                                    <input type="text" class="form-control" placeholder="Enter phone number" id="login_number" minlength="10" maxlength="10">
-                                                </div>
-                                            </fieldset>
+                                            <div id="phone_section">
 
-                                            <fieldset class="form-group">
-                                                <button type="button" class="btn btn-lg btn-secondary btn-block btn-login" onclick="login_function()">Next</button>
-                                            </fieldset>
+                                                <fieldset class="form-group">
+                                                    <label>Enter Mobile number</label>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon1">+91</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="Enter phone number" id="login_number" minlength="10" maxlength="10">
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset class="form-group">
+                                                    <button type="button" class="btn btn-lg btn-secondary btn-block btn-login" onclick="submitPhoneNumberAuth()">Next</button>
+                                                </fieldset>
+                                                <div id="recaptcha-container"></div>
+                                            </div>
+                                            <div id="otp_section" style="display: none">
+
+                                                <fieldset class="form-group">
+                                                    <label>Enter Otp</label>
+                                                    <div class="input-group mb-3">
+
+                                                        <input type="text" class="" id="partitioned"  maxlength="6">
+                                                    </div>
+                                                </fieldset>
+                                                    <fieldset class="form-group">
+                                                        <button type="button" class="btn btn-lg btn-secondary btn-block btn-login" onclick="submitPhoneNumberAuthCode()">Next</button>
+                                                    </fieldset>
+                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="clearfix"></div>
                                 </div>
-                            </form>
+{{--                            </form>--}}
                         </div>
                     </div>
                 </div>
