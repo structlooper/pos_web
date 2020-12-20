@@ -51,4 +51,8 @@ class IndexController extends Controller
         Session::forget('user_data');
         return back()->with('flash_success','user logout successfully');
     }
+    public function error_not(){
+
+        return view('notfound');
+    }
 }

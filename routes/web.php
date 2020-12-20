@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function () {
-    return view('test');
-});
+//Route::get('/test', function () {
+//    return view('test');
+//});
+Route::get('404','App\Http\Controllers\IndexController@error_not')->name('404_error');
 Route::group(['namespace' => 'App\Http\Controllers'],function(){
     Route::get('/','IndexController@index')->name('home');
     Route::post('ipa/user','IndexController@login')->name('login');

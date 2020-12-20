@@ -8,7 +8,7 @@ Home
     <div class="owl-carousel owl-carousel-slider">
         @foreach( $cat_banner as $key => $bnr)
         <div class="item">
-            <a href="shop.html"><img class="img-fluid" src="{{ $bnr->image }}" alt="First slide" style="min-width: 950px; height: 400px;"></a>
+            <a href="shop.html"><img class="img-fluid" src="{{ $bnr->image }}" alt="First slide" ></a>
         </div>
             @endforeach
 

@@ -128,7 +128,7 @@
 <nav class="navbar   navbar-light navbar-expand-lg bg-dark bg-faded osahan-menu">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('home') }}"> <img src="{{ $data['logo_url']  }}" alt="logo" width="80"> </a>
-        <a class="location-top" href="#"><i class="mdi mdi-map-marker-circle" aria-hidden="true"></i> New York</a>
+        <a class="location-top location" href="javascript:void(0)"><i class="mdi mdi-map-marker-circle " aria-hidden="true"></i> My location</a>
         <button class="navbar-toggler navbar-toggler-white" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -138,11 +138,14 @@
                     <div class="input-group">
                         <span class="input-group-btn categories-dropdown">
                            <select class="form-control-select">
-                              <option selected="selected">Your City</option>
-                              <option value="0">New Delhi</option>
-                              <option value="2">Bengaluru</option>
-                              <option value="3">Hyderabad</option>
-                              <option value="4">Kolkata</option>
+                                 @if($data['categories'])
+                                   @foreach($data['categories'] as $cat)
+                                       <option >{{ $cat->name }}</option>
+                                   @endforeach
+                               @else
+                                   <option >Categories</option>
+                               @endif
+
                            </select>
                         </span>
                         <input class="form-control" placeholder="Search products in Your City" aria-label="Search products in Your City" type="text">
@@ -166,7 +169,7 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('profile') }}"><i class="mdi mdi-account" aria-hidden="true"></i>  My Profile</a>
                             <a class="dropdown-item" href="{{ route('address') }}"><i class="mdi mdi-chevron-right" aria-hidden="true"></i>  My Address</a>
-                            <a class="dropdown-item" href="wishlist.html"><i class="mdi mdi-chevron-right" aria-hidden="true"></i>  Wish List </a>
+{{--                            <a class="dropdown-item" href="wishlist.html"><i class="mdi mdi-chevron-right" aria-hidden="true"></i>  Wish List </a>--}}
                             <a class="dropdown-item" href="{{ route('orders')}}"><i class="mdi mdi-truck" aria-hidden="true"></i>  Order List</a>
                             <a class="dropdown-item log-out-button" href="javascript:void(0)" id="log-out-button"><i class="mdi mdi-logout" aria-hidden="true"></i>  Logout</a>
                         </div>
@@ -185,7 +188,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 margin-auto">
                 <li class="nav-item">
-                    <a class="nav-link shop" href="index.html"><span class="mdi mdi-store"></span> Super Store</a>
+                    <a class="nav-link shop" href="javascript:void(0)"><span class="mdi mdi-store"></span> Super Store</a>
                 </li>
 
 

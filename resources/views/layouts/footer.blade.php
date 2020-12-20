@@ -4,30 +4,34 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3">
-                <h4 class="mb-5 mt-0"><a class="logo" href="index.html"><img src="{{ $data['logo_url'] }}" alt="Groci"></a></h4>
-                <p class="mb-0"><a class="text-dark" href="#"><i class="mdi mdi-phone"></i> +61 525 240 310</a></p>
-                <p class="mb-0"><a class="text-dark" href="#"><i class="mdi mdi-cellphone-iphone"></i> 12345 67890, 56847-98562</a></p>
-                <p class="mb-0"><a class="text-success" href="#"><i class="mdi mdi-email"></i> iamosahan@gmail.com</a></p>
-                <p class="mb-0"><a class="text-primary" href="#"><i class="mdi mdi-web"></i> www.askbootstrap.com</a></p>
+                <h4 class="mb-5 mt-0"><a class="logo" href="{{route('home')}}"><img src="{{ $data['logo_url'] }}" alt="tbo"></a></h4>
+                <p class="mb-0"><a class="text-dark" href="#"><i class="mdi mdi-phone"></i> {{ $data['shop_settings']->phone }}</a></p>
+{{--                <p class="mb-0"><a class="text-dark" href="#"><i class="mdi mdi-cellphone-iphone"></i> 12345 67890, 56847-98562</a></p>--}}
+                <p class="mb-0"><a class="text-success" href="#"><i class="mdi mdi-email"></i> {{ $data['shop_settings']->email }}</a></p>
+{{--                <p class="mb-0"><a class="text-primary" href="#"><i class="mdi mdi-web"></i> www.askbootstrap.com</a></p>--}}
             </div>
             <div class="col-lg-2 col-md-2">
-                <h6 class="mb-4">TOP CITIES </h6>
+                <h6 class="mb-4">TOP Brands </h6>
                 <ul>
-                    <li><a href="#">New Delhi</a></li>
-                    <li><a href="#">Bengaluru</a></li>
-                    <li><a href="#">Hyderabad</a></li>
-                    <li><a href="#">Kolkata</a></li>
-                    <li><a href="#">Gurugram</a></li>
+                    @if($data['brands'])
+                        @foreach($data['brands'] as $bnd)
+                            <li><a href="#">{{ $bnd->name }}</a></li>
+                        @endforeach
+                    @else
+                        <li>No brands to show</li>
+                    @endif
                     <ul>
             </div>
             <div class="col-lg-2 col-md-2">
                 <h6 class="mb-4">CATEGORIES</h6>
                 <ul>
-                    <li><a href="#">Vegetables</a></li>
-                    <li><a href="#">Grocery & Staples</a></li>
-                    <li><a href="#">Breakfast & Dairy</a></li>
-                    <li><a href="#">Soft Drinks</a></li>
-                    <li><a href="#">Biscuits & Cookies</a></li>
+                    @if($data['categories'])
+                        @foreach($data['categories'] as $cat)
+                    <li><a href="#">{{ $cat->name }}</a></li>
+                        @endforeach
+                    @else
+                        <li>No categories to show</li>
+                    @endif
                     <ul>
             </div>
             <div class="col-lg-2 col-md-2">
@@ -46,15 +50,15 @@
                     <a href="#"><img src="{{ asset('website/img/google.png') }}" alt=""></a>
                     <a href="#"><img src="{{ asset('website/img/apple.png') }}" alt=""></a>
                 </div>
-                <h6 class="mb-3 mt-4">GET IN TOUCH</h6>
-                <div class="footer-social">
-                    <a class="btn-facebook" href="#"><i class="mdi mdi-facebook"></i></a>
-                    <a class="btn-twitter" href="#"><i class="mdi mdi-twitter"></i></a>
-                    <a class="btn-instagram" href="#"><i class="mdi mdi-instagram"></i></a>
-                    <a class="btn-whatsapp" href="#"><i class="mdi mdi-whatsapp"></i></a>
-                    <a class="btn-messenger" href="#"><i class="mdi mdi-facebook-messenger"></i></a>
-                    <a class="btn-google" href="#"><i class="mdi mdi-google"></i></a>
-                </div>
+{{--                <h6 class="mb-3 mt-4">GET IN TOUCH</h6>--}}
+{{--                <div class="footer-social">--}}
+{{--                    <a class="btn-facebook" href="#"><i class="mdi mdi-facebook"></i></a>--}}
+{{--                    <a class="btn-twitter" href="#"><i class="mdi mdi-twitter"></i></a>--}}
+{{--                    <a class="btn-instagram" href="#"><i class="mdi mdi-instagram"></i></a>--}}
+{{--                    <a class="btn-whatsapp" href="#"><i class="mdi mdi-whatsapp"></i></a>--}}
+{{--                    <a class="btn-messenger" href="#"><i class="mdi mdi-facebook-messenger"></i></a>--}}
+{{--                    <a class="btn-google" href="#"><i class="mdi mdi-google"></i></a>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>
@@ -65,8 +69,8 @@
     <div class="container">
         <div class="row no-gutters">
             <div class="col-lg-6 col-sm-6">
-                <p class="mt-1 mb-0">&copy; Copyright 2020 <strong class="text-dark">Groci</strong>. All Rights Reserved<br>
-                    <small class="mt-0 mb-0">Made with <i class="mdi mdi-heart text-danger"></i> by <a href="https://askbootstrap.com/" target="_blank" class="text-primary">Ask Bootstrap</a>
+                <p class="mt-1 mb-0">&copy; Copyright 2020 <strong class="text-dark">{{ $data['site_settings']->site_name }}</strong>. All Rights Reserved<br>
+                    <small class="mt-0 mb-0">Made with <i class="mdi mdi-heart text-danger"></i> by <a href="javascript:void(0)" target="_blank" class="text-primary">Sikarwar Software</a>
                     </small>
                 </p>
             </div>
@@ -80,20 +84,20 @@
 
 <div class="footer-fix-nav shadow">
     <div class="row mx-0">
-        <div class="col">
-            <a href="#"><i class="mdi mdi-home"></i></a>
+        <div class="col @if(Request::url() == route('home')) active @endif">
+            <a href="{{ route('home') }}"><i class="mdi mdi-home"></i></a>
         </div>
-        <div class="col border-0">
-            <a href="#"><i class="mdi mdi-microphone"></i></a>
-        </div>
-        <div class="col active">
-            <a class="toggle" href="#"><i class="mdi mdi-menu"></i></a>
+        <div class="col border-0 @if(Request::url() == route('address')) active @endif">
+            <a href="{{ route('address') }}"><i class="mdi mdi-account-location"></i></a>
         </div>
         <div class="col">
-            <a href="#"><i class="mdi mdi-tag"></i></a>
+            <a data-toggle="collapse" data-target="#navbarText" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a>
         </div>
-        <div class="col">
-            <a href="#"><i class="mdi mdi-account-circle"></i></a>
+        <div class="col @if(Request::url() == route('orders')) active @endif">
+            <a href="{{ route('orders') }}"><i class="mdi mdi-truck"></i></a>
+        </div>
+        <div class="col @if(Request::url() == route('profile')) active @endif">
+            <a href="{{ route('profile') }}"><i class="mdi mdi-account-circle"></i></a>
         </div>
     </div>
 </div>
@@ -533,6 +537,14 @@
 <script>
     // jQuery.ready(function (){
 
+        function loadLoction(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition)
+            }else{
+                console.log('geo location not support')
+            }
+        }
+
     // })
     (function($) {
         var $main_nav = $('#main-nav');
@@ -641,6 +653,8 @@
             @endif
 
         })
+        loadLoction();
+
     })(jQuery);
     $(window).scroll(function() {
         if ( $(window).scrollTop() >= 80 ) {
@@ -649,6 +663,27 @@
             $('#fixNav').removeClass('fixed-top')
         }
     });
+
+function showPosition(position){
+    let lat = position.coords.latitude;
+    let lng = position.coords.longitude;
+    let geo_result = "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyA0ztr7esW-B9pyRKUYEa5d8CxLPnCdtdA&latlng="+lat+","+lng+""
+    $.get({
+        url:geo_result,
+        success(data){
+            // console.log(data)
+            let ad_1 = data.results[0].address_components[3].long_name;
+            let ad_2 = data.results[0].address_components[5].long_name;
+            let ad_3 = data.results[0].address_components[6].long_name;
+            let formated_address = ad_1+', '+ad_2 +' '+ad_3;
+            $('.location').html('<i class="mdi mdi-map-marker-circle " aria-hidden="true"></i>'+formated_address)
+        },
+        error(error){
+            console.log('map not load internal error')
+        }
+    })
+
+}
 </script>
 <!-- Add the latest firebase dependecies from CDN -->
 <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
@@ -658,7 +693,7 @@
     // Paste the config your copied earlier
     var firebaseConfig = {
         apiKey: "AIzaSyCc86h8PRxDMCtdogHOYrUhO7qtB6pNfxo",
-        authDomain: "the-best-one-22bb3.firebaseapp.com",
+        authDomain: "thelocation-best-one-22bb3.firebaseapp.com",
         projectId: "the-best-one-22bb3",
         storageBucket: "the-best-one-22bb3.appspot.com",
         messagingSenderId: "927758053588",

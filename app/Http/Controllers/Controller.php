@@ -23,7 +23,15 @@ class Controller extends BaseController
             ->inRandomOrder()
             ->limit(6)
             ->get();
-
+        $data['brands'] = DB::table('sma_brands')
+//            ->where('parent_id',0)
+//            ->orwhere('parent_id',null)
+            ->inRandomOrder()
+            ->limit(10)
+            ->get();
+        $data['shop_settings'] = DB::table('sma_shop_settings')
+            ->where('shop_id',1)
+            ->first();
         View::share('data', $data);
     }
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
