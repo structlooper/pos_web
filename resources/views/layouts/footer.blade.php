@@ -1,6 +1,6 @@
 
 <!-- Footer -->
-<section class="section-padding footer bg-white border-top">
+<section class="section-padding footer bg-white border-top" id="footer">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3">
@@ -15,7 +15,10 @@
                 <ul>
                     @if($data['brands'])
                         @foreach($data['brands'] as $bnd)
-                            <li><a href="#">{{ $bnd->name }}</a></li>
+                            @if(is_null($bnd->slug ))
+                            @else
+                            <li><a href="{{ route('brands',$bnd->slug ? $bnd->slug :'7up' ) }}">{{ $bnd->name }}</a></li>
+                            @endif
                         @endforeach
                     @else
                         <li>No brands to show</li>
@@ -27,7 +30,7 @@
                 <ul>
                     @if($data['categories'])
                         @foreach($data['categories'] as $cat)
-                    <li><a href="#">{{ $cat->name }}</a></li>
+                    <li><a href="{{ route('shop_main',$cat->slug) }}">{{ $cat->name }}</a></li>
                         @endforeach
                     @else
                         <li>No categories to show</li>
@@ -766,6 +769,119 @@ function showPosition(position){
     //         console.log("USER NOT LOGGED IN");
     //     }
     // });
+
+
+
+
+</script>
+    <script>
+
+$('.bycategory').click(function() {
+//  alert($(this).attr('value'));
+
+ let urlajax = $(".hehehe").attr('value');
+ let dataaa =$(this).attr('value')
+//   alert(dataaa);
+    if(this.checked){
+        console.log("Making request");
+         $.ajax({
+             type: "POST",
+             url: "{{ $data['image_url'].'api/product'}}",
+             data:  {category_id:'dataaa'},
+             xhrFields: {
+                withCredentials: true
+            },
+            async: false,
+            crossDomain: true,
+            dataType: "json",
+             success: function(data) {
+
+                $("#ajax123").hide();
+
+             var testArray = data.data;
+            if(testArray.length!=0)
+
+          {
+            $.each(testArray, function( index, value ) {
+                   console.log(value);
+                   var html = '<div class="col-md-4"><div class="product"><a href="../single/"'+value.slug+'><div class="product-header"><span class="badge badge-success">50% OFF</span><img class="img-fluid" src="{{ $data['image_url']}}img/item/'+value.image+'" alt=""><span class="veg text-success mdi mdi-circle"></span></div><div class="product-body"><h5>'+value.name+'</h5><h6><strong><span class="mdi mdi-approval"></span> Available in</strong> - '+value.weight+'gm</h6></div><div class="product-footer"><button type="button" class="btn btn-secondary btn-sm float-right"><i class="mdi mdi-cart-outline"></i> Add To Cart</button><p class="offer-price mb-0">'+value.price+'</p><i class="mdi mdi-tag-outline"></i><br><span class="regular-price">'+value.cost+'</span></p></div></a></div></div>';
+
+                   $("#ajax1234").append(html);
+            });
+
+
+             }
+             else
+             {
+                  $("#ajax1234").append("<h1>No data Found");
+             }
+             },
+             error: function(fail)
+            {
+                alert('internal server error please refresh page')
+                console.log("fail");
+                console.log(fail.responseText);
+            },
+         });
+
+         }
+   });
+</script>
+
+
+  <script>
+
+$('.bybrands').click(function() {
+//  alert($(this).attr('value'));
+
+
+ let dataaa =$(this).attr('value')
+//   alert(dataaa);
+    if(this.checked){
+        console.log("Making request");
+         $.ajax({
+             type: "POST",
+             url: "{{ $data['image_url'].'/api/product/product_brand'}}",
+             data:  {brand_id:'dataaa'},
+             xhrFields: {
+                withCredentials: true
+            },
+            async: false,
+            crossDomain: true,
+            dataType: "json",
+
+             success: function(data) {
+                $("#ajax1234").hide();
+                $("#ajax123").hide();
+
+             var testArray = data.data;
+            if(testArray.length!=0)
+
+          {
+            $.each(testArray, function( index, value ) {
+                  console.log(value);
+                  var html = '<div class="col-md-4"><div class="product"><a href="../single/"'+value.slug+'><div class="product-header"><span class="badge badge-success">50% OFF</span><img class="img-fluid" src="{{ $data['image_url']}}img/item/'+value.image+'" alt=""><span class="veg text-success mdi mdi-circle"></span></div><div class="product-body"><h5>'+value.name+'</h5><h6><strong><span class="mdi mdi-approval"></span> Available in</strong> - '+value.weight+'gm</h6></div><div class="product-footer"><button type="button" class="btn btn-secondary btn-sm float-right"><i class="mdi mdi-cart-outline"></i> Add To Cart</button><p class="offer-price mb-0">'+value.price+'</p><i class="mdi mdi-tag-outline"></i><br><span class="regular-price">'+value.cost+'</span></p></div></a></div></div>';
+
+                  $("#ajax12345").append(html);
+            });
+
+
+             }
+             else
+             {
+                  $("#ajax12345").append("<h1>No data Found");
+             }
+             },
+             error: function(fail)
+            {
+                alert('internal server error please refresh page')
+                console.log("fail");
+                console.log(fail.responseText);
+            },
+         });
+
+         }
+   });
 </script>
     @yield('js')
 </body>

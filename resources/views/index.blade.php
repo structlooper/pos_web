@@ -4,6 +4,25 @@ Home
 @endsection
 
 @section('content')
+    <section class="top-category section-padding">
+        <div class="container">
+            <div class="owl-carousel owl-carousel-category">
+                @foreach($cat as $c)
+                    <div class="item">
+                        <div class="category-item">
+                            <a href="{{ route('shop_main',$c->slug) }}">
+                                <img class="img-fluid" src="{{ $c->image ? $data['image_url'].'assets/uploads/thumbs/'.$c->image: asset('website/img/slider/slider2.jpg') }}" alt="">
+                                <h6>{{ str_replace('&amp;','&',$c->name) }}</h6>
+                                <p class="badge badge-success">{{ $c->title }}</p>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
+    </section>
+
 <section class="carousel-slider-main text-center border-top border-bottom bg-white">
     <div class="owl-carousel owl-carousel-slider">
         @foreach( $cat_banner as $key => $bnr)
@@ -14,24 +33,7 @@ Home
 
     </div>
 </section>
-<section class="top-category section-padding">
-    <div class="container">
-        <div class="owl-carousel owl-carousel-category">
-            @foreach($cat as $c)
-            <div class="item">
-                <div class="category-item">
-                    <a href="shop.html">
-                        <img class="img-fluid" src="{{ $c->image ? $data['image_url'].'assets/uploads/thumbs/'.$c->image: asset('website/img/slider/slider2.jpg') }}" alt="">
-                        <h6>{{ $c->name }}</h6>
-                        <p>{{ $c->title }}</p>
-                    </a>
-                </div>
-            </div>
-            @endforeach
 
-        </div>
-    </div>
-</section>
 @if(isset($offer_banner))
 @foreach($offer_banner as $i => $ofr)
     <?php $offer_products = App\Helper\ProductHelper::getProductByOffer($ofr->offer_id);  ?>
@@ -52,7 +54,7 @@ Home
         <div class="container">
             <div class="section-header">
                 <h5 class="heading-design-h5">{{ $ofr->offer_title }} <span class="badge badge-info">{{ $ofr->offer_amount }} <?php if($ofr->offer_type == "PERCENT") { echo '%'; }else{ echo '₹' ;}?> OFF</span>
-                    <a class="float-right text-secondary" href="shop.html">View All</a>
+{{--                    <a class="float-right text-secondary" href="shop.html">View All</a>--}}
                 </h5>
             </div>
             <div class="owl-carousel owl-carousel-featured">
@@ -60,7 +62,7 @@ Home
                     @foreach( $offer_products as $ofrpd)
                     <div class="item">
                     <div class="product">
-                        <a href="single.html">
+                        <a href="{{ route('detail',$ofrpd->slug) }}">
                             <div class="product-header">
                                 <span class="badge badge-success">{{ number_format(((intval($ofrpd->cost) - intval($ofrpd->price))*100)/intval($ofrpd->cost),2) }}% OFF</span>
                                 <img class="img-fluid" src="{{ $data['image_url'].'assets/uploads/thumbs/'.$ofrpd->image }}" alt="">
@@ -102,7 +104,7 @@ Home
         <div class="container">
             <div class="section-header">
                 <h5 class="heading-design-h5">{{ $ofr->offer_title }} <span class="badge badge-primary">{{ $ofr->offer_amount }} <?php if($ofr->offer_type == "PERCENT") { echo '%'; }else{ echo '₹' ;}?> OFF</span>
-                    <a class="float-right text-secondary" href="shop.html">View All</a>
+{{--                    <a class="float-right text-secondary" href="shop.html">View All</a>--}}
                 </h5>
             </div>
             <div class="row no-gutters">
@@ -111,7 +113,7 @@ Home
                 @foreach( $offer_products as $j => $ofrpd)
                         <div class="col-md-3">
                             <div class="product">
-                                <a href="single.html">
+                                <a href="{{ route('detail',$ofrpd->slug) }}">
                                     <div class="product-header">
                                         <span class="badge badge-success">{{ number_format(((intval($ofrpd->cost) - intval($ofrpd->price))*100)/intval($ofrpd->cost),2) }}% OFF</span>
                                         <img class="img-fluid" src="{{ $data['image_url'].'assets/uploads/thumbs/'.$ofrpd->image }}" alt="">

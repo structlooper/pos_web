@@ -55,4 +55,7 @@ class IndexController extends Controller
 
         return view('notfound');
     }
+    public function privacy_Policy(){
+        return view('privacy_Policy');
+    }
 }

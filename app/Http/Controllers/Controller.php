@@ -21,13 +21,12 @@ class Controller extends BaseController
             ->where('parent_id',0)
             ->orwhere('parent_id',null)
             ->inRandomOrder()
-            ->limit(6)
+            ->limit(7)
             ->get();
         $data['brands'] = DB::table('sma_brands')
 //            ->where('parent_id',0)
 //            ->orwhere('parent_id',null)
             ->inRandomOrder()
-            ->limit(10)
             ->get();
         $data['shop_settings'] = DB::table('sma_shop_settings')
             ->where('shop_id',1)

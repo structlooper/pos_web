@@ -28,8 +28,10 @@
         .width_mix {
             max-width: 180px;
             min-width: 180px;
-            overflow-x: hidden;
-            overflow-y: unset;
+            max-height: 47px;
+            min-height: 47px;
+            overflow: hidden;
+            /*overflow-y: hidden;*/
             text-overflow: ellipsis;
 
         }
@@ -128,7 +130,7 @@
 <nav class="navbar   navbar-light navbar-expand-lg bg-dark bg-faded osahan-menu">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('home') }}"> <img src="{{ $data['logo_url']  }}" alt="logo" width="80"> </a>
-        <a class="location-top location" href="javascript:void(0)"><i class="mdi mdi-map-marker-circle " aria-hidden="true"></i> My location</a>
+        <a class="location-top location" style="max-width: 193px; max-height:27px; overflow: hidden" href="javascript:void(0)"><i class="mdi mdi-map-marker-circle " aria-hidden="true"></i> My location</a>
         <button class="navbar-toggler navbar-toggler-white" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -136,18 +138,18 @@
             <div class="navbar-nav mr-auto mt-2 mt-lg-0 margin-auto top-categories-search-main">
                 <div class="top-categories-search">
                     <div class="input-group">
-                        <span class="input-group-btn categories-dropdown">
-                           <select class="form-control-select">
-                                 @if($data['categories'])
-                                   @foreach($data['categories'] as $cat)
-                                       <option >{{ $cat->name }}</option>
-                                   @endforeach
-                               @else
-                                   <option >Categories</option>
-                               @endif
+{{--                        <span class="input-group-btn categories-dropdown">--}}
+{{--                           <select class="form-control-select">--}}
+{{--                                 @if($data['categories'])--}}
+{{--                                   @foreach($data['categories'] as $cat)--}}
+{{--                                       <option >{{ str_replace('&amp;','&', $cat->name) }}</option>--}}
+{{--                                   @endforeach--}}
+{{--                               @else--}}
+{{--                                   <option >Categories</option>--}}
+{{--                               @endif--}}
 
-                           </select>
-                        </span>
+{{--                           </select>--}}
+{{--                        </span>--}}
                         <input class="form-control" placeholder="Search products in Your City" aria-label="Search products in Your City" type="text">
                         <span class="input-group-btn">
                         <button class="btn btn-secondary" type="button"><i class="mdi mdi-file-find"></i> Search</button>
@@ -183,32 +185,40 @@
         </div>
     </div>
 </nav>
-<nav class="navbar   navbar-expand-lg navbar-light osahan-menu-2 pad-none-mobile"  id="fixNav" style="margin-bottom: -2px;">
+<nav class="navbar   navbar-expand-lg navbar-light osahan-menu-2 pad-none-mobile" @if(Request::url() == route('home')) style="display: none;" @endif id="fixNav" style="margin-bottom: -2px;">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 margin-auto">
-                <li class="nav-item">
-                    <a class="nav-link shop" href="javascript:void(0)"><span class="mdi mdi-store"></span> Super Store</a>
-                </li>
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link shop" href="javascript:void(0)"><span class="mdi mdi-store"></span> Super Store</a>--}}
+{{--                </li>--}}
 
 
                 @foreach( $data['categories'] as $cat)
 
-                    <li class="nav-item dropdown text-center" >
+{{--                    <li class="nav-item dropdown text-center" >--}}
+{{--                        <div class="width_mix">--}}
+{{--                    <a class="nav-link dropdown-toggle" href="{{ route('shop_main',$cat->slug) }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                        {{ str_replace('&amp;','&', $cat->name) }}--}}
+{{--                    </a>--}}
+{{--                        <?php $subcat = App\Helper\CategoryHepler::getSubCategoryByCategory($cat->id);  ?>--}}
+
+{{--                    <div class="dropdown-menu" >--}}
+{{--                        @if(sizeof($subcat) > 0)--}}
+{{--                        @foreach($subcat as $sub)--}}
+{{--                        <a class="dropdown-item" href="{{ $data['image_url'] }}../shop/{{$sub->slug}}"><i class="mdi mdi-chevron-right" aria-hidden="true"></i>  {{ $sub->name }}</a>--}}
+{{--                        @endforeach--}}
+{{--                        @endif--}}
+
+{{--                    </div>--}}
+{{--                        </div>--}}
+{{--                </li>--}}
+                    <li class=" text-center" >
                         <div class="width_mix">
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ $cat->name }}
+                    <a class="nav-link dropdown" href="{{ route('shop_main',$cat->slug) }}" >
+                        {{ str_replace('&amp;','&', $cat->name) }}
                     </a>
-                        <?php $subcat = App\Helper\CategoryHepler::getSubCategoryByCategory($cat->id);  ?>
 
-                    <div class="dropdown-menu" >
-                        @if(sizeof($subcat) > 0)
-                        @foreach($subcat as $sub)
-                        <a class="dropdown-item" href="shop.html"><i class="mdi mdi-chevron-right" aria-hidden="true"></i> {{ $sub->name }}</a>
-                        @endforeach
-                        @endif
-
-                    </div>
                         </div>
                 </li>
                 @endforeach
