@@ -12,8 +12,13 @@ class IndexController extends Controller
 
     public function index(){
         $data['cat_banner'] = DB::table('sma_primary_banner')
+            ->select('sma_categories.slug','sma_primary_banner.*')
+            ->join('sma_categories','sma_categories.id','=','sma_primary_banner.category_id')
             ->get();
+
         $data['brand_banner'] = DB::table('sma_secondary_banner')
+            ->select('sma_brands.slug','sma_secondary_banner.*')
+            ->join('sma_brands','sma_brands.id','=','sma_secondary_banner.brand_id')
             ->get();
         $data['offer_banner'] = DB::table('sma_offers')
             ->inRandomOrder()

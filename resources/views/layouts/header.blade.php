@@ -46,6 +46,39 @@
             background-position-x: 35px;
             width: 300px;
         }
+        .clear{
+            clear:both;
+            margin-top: 20px;
+        }
+
+        #searchResult{
+            list-style: none;
+            padding: 0px;
+            width: 250px;
+            position: absolute;
+            margin: 0;
+        }
+
+        #searchResult li{
+            background: lavender;
+            padding: 4px;
+            margin-bottom: 1px;
+        }
+
+        #searchResult li:nth-child(even){
+            background: cadetblue;
+            color: white;
+        }
+
+        #searchResult li:hover{
+            cursor: pointer;
+        }
+
+        input[type=text]{
+            padding: 5px;
+            width: 250px;
+            letter-spacing: 1px;
+        }
     </style>
 @yield('style')
 
@@ -150,13 +183,18 @@
 
 {{--                           </select>--}}
 {{--                        </span>--}}
-                        <input class="form-control" placeholder="Search products in Your City" aria-label="Search products in Your City" type="text">
-                        <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button"><i class="mdi mdi-file-find"></i> Search</button>
+
+                        <input class="form-control" id="search_prod"  name="search_prod" placeholder="Search products in Your City" aria-label="Search products in Your City" type="text">
+
+                        <span class="input-group-btn" id="search_btn">
+
+                        <button class="btn btn-secondary" type="button"  onclick="search_btn_1()"> <i class="mdi mdi-file-find" ></i> Search</button>
                         </span>
+
                     </div>
                 </div>
             </div>
+
             <div class="my-2 my-lg-0">
                 <ul class="list-inline main-nav-right">
                     @if(is_null(Session::get('user_data')))
@@ -185,8 +223,17 @@
         </div>
     </div>
 </nav>
+<div class="container ">
+    <ul class="list-group" style=" margin-left: 225px;
+    max-width: 550px;" id="result">
+
+
+    </ul>
+</div>
 <nav class="navbar   navbar-expand-lg navbar-light osahan-menu-2 pad-none-mobile" @if(Request::url() == route('home')) style="display: none;" @endif id="fixNav" style="margin-bottom: -2px;">
+
     <div class="container-fluid">
+
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 margin-auto">
 {{--                <li class="nav-item">--}}
